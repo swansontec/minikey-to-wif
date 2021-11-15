@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Convert minikeys and hbits keys to WIF format",
+  "repository": "https://github.com/swansontec/minikey-to-wif",
   "license": "MIT",
   "author": "William Swanson",
   "scripts": {
