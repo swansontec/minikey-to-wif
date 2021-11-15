@@ -107,9 +107,9 @@ function processText(text: string): string {
   return "invalid input";
 }
 
-const params = new URLSearchParams(window.location.search);
-const minikey = params.get("minikey");
-if (minikey != null) {
-  (document.getElementById("minikey") as HTMLInputElement).value = minikey;
-  document.getElementById("output").innerText = processText(minikey);
-}
+const form = document.getElementById("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const minikey = document.getElementById("minikey") as HTMLInputElement;
+  document.getElementById("output").innerText = processText(minikey.value);
+});
