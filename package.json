@@ -5,9 +5,9 @@
   "description": "Convert minikeys and hbitz keys to WIF format",
   "license": "MIT",
   "author": "William Swanson",
-  "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build --public-url . src/index.html"
   },
   "dependencies": {
     "base-x": "^1.0.4",
