@@ -2,7 +2,7 @@
   "name": "minikey-to-wif",
   "version": "1.0.0",
   "private": true,
-  "description": "Convert minikeys and hbitz keys to WIF format",
+  "description": "Convert minikeys and hbits keys to WIF format",
   "license": "MIT",
   "author": "William Swanson",
   "scripts": {
