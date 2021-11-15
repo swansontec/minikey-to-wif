@@ -1,0 +1,19 @@
+{
+  "name": "minikey-to-wif",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Convert minikeys and hbitz keys to WIF format",
+  "license": "MIT",
+  "author": "William Swanson",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "dependencies": {
+    "base-x": "^1.0.4",
+    "hash.js": "^1.1.7"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  }
+}
