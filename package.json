@@ -7,14 +7,18 @@
   "license": "MIT",
   "author": "William Swanson",
   "scripts": {
+    "build": "parcel build --public-url . src/index.html",
     "start": "parcel src/index.html",
-    "build": "parcel build --public-url . src/index.html"
+    "test": "mocha -r sucrase/register test/**/*.test.ts"
   },
   "dependencies": {
     "base-x": "^1.0.4",
     "hash.js": "^1.1.7"
   },
   "devDependencies": {
-    "parcel": "^2.7.0"
+    "mocha": "^10.0.0",
+    "parcel": "^2.7.0",
+    "rfc4648": "^1.5.2",
+    "sucrase": "^3.26.0"
   }
 }
