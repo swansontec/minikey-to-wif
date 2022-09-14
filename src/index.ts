@@ -1,14 +1,5 @@
-import hashjs from "hash.js";
-import baseX from "base-x";
-
-const base58Codec = baseX(
-  "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-);
-
-export function sha256(data: Uint8Array): Uint8Array {
-  const hash = hashjs.sha256();
-  return Uint8Array.from(hash.update(data).digest());
-}
+import { encodeWif } from "./wif";
+import { sha256 } from "./sha256";
 
 const utf8 = {
   parse(text: string): Uint8Array {
@@ -31,16 +22,6 @@ const utf8 = {
     return out.subarray(0, di);
   },
 };
-
-function encodeWif(secret: Uint8Array, compressed: boolean): string {
-  const bytes = new Uint8Array(secret.length + (compressed ? 6 : 5));
-  bytes[0] = 0x80;
-  bytes.set(secret, 1);
-  if (compressed) bytes.set([0x01], secret.length + 1);
-  const checksum = sha256(bytes.subarray(0, -4)).slice(0, 4);
-  bytes.set(checksum, bytes.length - 4);
-  return base58Codec.encode(bytes);
-}
 
 const hbitsKey = [
   0x9b, 0xae, 0x41, 0x66, 0x0b, 0xb8, 0x4c, 0x84, 0x39, 0x34, 0xd4, 0x6a, 0x7f,
