@@ -1,14 +1,5 @@
-import hashjs from "hash.js";
-import baseX from "base-x";
-
-const base58Codec = baseX(
-  "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-);
-
-export function sha256(data: Uint8Array): Uint8Array {
-  const hash = hashjs.sha256();
-  return Uint8Array.from(hash.update(data).digest());
-}
+import { encodeWif } from "./wif";
+import { sha256 } from "./sha256";
 
 const utf8 = {
   parse(text: string): Uint8Array {
@@ -32,16 +23,6 @@ const utf8 = {
   },
 };
 
-function encodeWif(secret: Uint8Array, compressed: boolean): string {
-  const bytes = new Uint8Array(secret.length + (compressed ? 6 : 5));
-  bytes[0] = 0x80;
-  bytes.set(secret, 1);
-  if (compressed) bytes.set([0x01], secret.length + 1);
-  const checksum = sha256(bytes.subarray(0, -4)).slice(0, 4);
-  bytes.set(checksum, bytes.length - 4);
-  return base58Codec.encode(bytes);
-}
-
 const hbitsKey = [
   0x9b, 0xae, 0x41, 0x66, 0x0b, 0xb8, 0x4c, 0x84, 0x39, 0x34, 0xd4, 0x6a, 0x7f,
   0x4d, 0xba, 0x04, 0x1b, 0x48, 0xc9, 0x0d, 0x7e, 0x0a, 0xe2, 0x34, 0xbe, 0x69,
@@ -58,7 +39,8 @@ const hbitsKey = [
  *
  * Test vector:
  * hbits://S23c2fe8dbd330539a5fbab16a7602
- * WIF: KxekNxnLVuzQxSbu22NSK8y69HZZwmaZNsQvBLqa3cprJ1SBdymA
+ * Secret:  0x2AB7C27C5EE4E48DA1F4DDC41913B9FF87EB1438A8422B7E21AB4914F8DFD826
+ * WIF:     KxekNxnLVuzQxSbu22NSK8y69HZZwmaZNsQvBLqa3cprJ1TagVfr
  * Address: 1Lbd7DZWdz7fMR1sHHnWfnfQeAFoT52ZAi
  */
 function hbitsDecode(text: string): Uint8Array {
@@ -107,9 +89,10 @@ function processText(text: string): string {
   return "invalid input";
 }
 
-const form = document.getElementById("form");
+const form = document.getElementById("form") as HTMLFormElement;
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const minikey = document.getElementById("minikey") as HTMLInputElement;
-  document.getElementById("output").innerText = processText(minikey.value);
+  const output = document.getElementById("output") as HTMLSpanElement;
+  output.innerText = processText(minikey.value);
 });
