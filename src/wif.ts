@@ -11,7 +11,7 @@ export function encodeWif(secret: Uint8Array, compressed: boolean): string {
   bytes[0] = 0x80;
   bytes.set(secret, 1);
   if (compressed) bytes.set([0x01], secret.length + 1);
-  const checksum = sha256(bytes.subarray(0, -4)).slice(0, 4);
+  const checksum = sha256(sha256(bytes.subarray(0, -4))).slice(0, 4);
   bytes.set(checksum, bytes.length - 4);
   return base58Codec.encode(bytes);
 }

@@ -39,7 +39,8 @@ const hbitsKey = [
  *
  * Test vector:
  * hbits://S23c2fe8dbd330539a5fbab16a7602
- * WIF: KxekNxnLVuzQxSbu22NSK8y69HZZwmaZNsQvBLqa3cprJ1SBdymA
+ * Secret:  0x2AB7C27C5EE4E48DA1F4DDC41913B9FF87EB1438A8422B7E21AB4914F8DFD826
+ * WIF:     KxekNxnLVuzQxSbu22NSK8y69HZZwmaZNsQvBLqa3cprJ1TagVfr
  * Address: 1Lbd7DZWdz7fMR1sHHnWfnfQeAFoT52ZAi
  */
 function hbitsDecode(text: string): Uint8Array {
