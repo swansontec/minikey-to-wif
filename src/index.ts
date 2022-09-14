@@ -107,9 +107,10 @@ function processText(text: string): string {
   return "invalid input";
 }
 
-const form = document.getElementById("form");
+const form = document.getElementById("form") as HTMLFormElement;
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const minikey = document.getElementById("minikey") as HTMLInputElement;
-  document.getElementById("output").innerText = processText(minikey.value);
+  const output = document.getElementById("output") as HTMLSpanElement;
+  output.innerText = processText(minikey.value);
 });
